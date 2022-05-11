@@ -1,0 +1,16 @@
+[package]
+name = "rust-template"
+version = "0.1.0"
+authors = ["AltF2 <contact@altf2.dev>"]
+edition = "2021"
+readme = "README.md"
+license = "GPL-3.0"
+
+[profile.release]
+lto = "thin"
+
+[dependencies]
+anyhow = "1.0.57"
+tracing = "0.1.34"
+tracing-subscriber = { version = "0.3.11", features = ["env-filter"] }
+
