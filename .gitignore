@@ -11,3 +11,6 @@
 
 # Editors
 .idea/
+
+# Config
+.env
