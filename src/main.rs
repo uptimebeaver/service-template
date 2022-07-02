@@ -3,7 +3,8 @@ use std::env;
 use tonic::transport::Server;
 use tracing::{info, warn};
 
-use template_lib::services::greeter::GreeterService; // TODO: Change me
+use template_lib::services::greeter::GreeterService;
+use utils::database::{DataBase, DB}; // TODO: Change me
 
 #[tokio::main]
 async fn main() -> Result<()> {
@@ -11,6 +12,13 @@ async fn main() -> Result<()> {
     dotenv::dotenv()?;
 
     utils::logging::setup(env::var("RUST_LOG")?)?;
+
+    info!("setting up database");
+
+    let db = DataBase::from_uri(env::var("DATABASE_URL")?).await?;
+    DB.set(db).expect("unable to set DB");
+
+    info!("finished setting up database");
 
     info!("starting service.");
 

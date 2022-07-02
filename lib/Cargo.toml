@@ -13,6 +13,8 @@ tracing = "0.1.34"
 anyhow = "1.0.57"
 tonic = "0.7.2"
 prost = "0.10"
+migration = { path = "../migration" }
+entity = { path = "../entity" }
 
 [build-dependencies]
 tonic-build = { version = "0.7",  features = ["prost"] }

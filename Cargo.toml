@@ -13,12 +13,13 @@ lto = "thin"
 anyhow = "1.0"
 tracing = "0.1"
 tracing-subscriber = { version = "0.3.11", features = ["env-filter"] }
-template-lib = { path = "./lib" } # TODO: Change name
-utils = { path = "./utils" }
 tonic = "0.7.2"
 tokio = { version = "1.19.2", features = ["macros", "rt-multi-thread"] }
 dotenv = "0.15.0"
 sea-orm = { version = "0.8.0", features = ["sqlx-postgres", "runtime-tokio-native-tls", "macros"] }
+
+template-lib = { path = "./lib" } # TODO: Change name
+utils = { path = "./utils" }
 
 [dev-dependencies.cargo-husky]
 version = "1"
