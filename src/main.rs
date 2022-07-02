@@ -7,7 +7,9 @@ use template_lib::services::greeter::GreeterService; // TODO: Change me
 
 #[tokio::main]
 async fn main() -> Result<()> {
+    #[cfg(debug_assertions)]
     dotenv::dotenv()?;
+
     utils::logging::setup(env::var("RUST_LOG")?)?;
 
     info!("starting service.");

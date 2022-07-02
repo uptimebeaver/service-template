@@ -1,0 +1,16 @@
+version: "3"
+services:
+  postgres:
+    image: postgres
+    environment:
+      # TODO: Change me
+      POSTGRES_DB: template
+      POSTGRES_PASSWORD: pass
+      POSTGRES_USER: user
+    volumes:
+      - dev-data:/var/lib/postgresql/data # TODO: Change me
+    ports:
+      - "5432:5432"
+
+volumes:
+  dev-data:
