@@ -13,11 +13,11 @@ jobs:
         with:
           submodules: recursive
 
-      - name: Install nightly toolchain
+      - name: Install stable toolchain
         id: toolchain
         uses: actions-rs/toolchain@v1
         with:
-          toolchain: nightly
+          toolchain: stable
           components: clippy
           profile: minimal
           override: true
@@ -57,12 +57,13 @@ jobs:
     steps:
       - name: Checkout sources
         uses: actions/checkout@v2
-
-      - name: Install nightly toolchain
+        
+      - name: Install stable toolchain
+        id: toolchain
         uses: actions-rs/toolchain@v1
         with:
-          toolchain: nightly
-          components: rustfmt
+          toolchain: stable
+          components: clippy
           profile: minimal
           override: true
 
