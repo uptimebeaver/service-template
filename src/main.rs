@@ -3,8 +3,8 @@ use std::env;
 use tonic::transport::Server;
 use tracing::{info, warn};
 
-use template_lib::services::greeter::GreeterService;
-use utils::database::{DataBase, DB}; // TODO: Change me
+use service_template::services::greeter::GreeterService; // TODO: Change me
+use utils::database::{DataBase, DB};
 
 #[tokio::main]
 async fn main() -> Result<()> {
