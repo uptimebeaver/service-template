@@ -21,7 +21,7 @@ prost = "0.10"
 
 migration = { path = "./migration" }
 entity = { path = "./entity" }
-utils = { path = "./utils" }
+utils = { git = "https://github.com/uptimebeaver/utils.git" }
 
 [dev-dependencies.cargo-husky]
 version = "1"
