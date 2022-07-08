@@ -1,6 +1,3 @@
 [submodule "proto"]
 	path = proto
 	url = https://github.com/uptimebeaver/proto
-[submodule "utils"]
-	path = utils
-	url = https://github.com/uptimebeaver/utils.git

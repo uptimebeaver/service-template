@@ -2540,6 +2540,7 @@ dependencies = [
 [[package]]
 name = "utils"
 version = "0.1.0"
+source = "git+https://github.com/uptimebeaver/utils.git#8b0f0f439d77e23a39f6350c437d35906a14e0a1"
 dependencies = [
  "anyhow",
  "once_cell",
