@@ -1,22 +1,29 @@
-use anyhow::Result;
+use color_eyre::eyre::Result;
+use migration::{Migrator, MigratorTrait};
+use sea_orm::Database;
 use std::env;
 use tonic::transport::Server;
 use tracing::{info, warn};
+use tracing_subscriber::prelude::*;
 
 use service_template::services::greeter::GreeterService; // TODO: Change me
-use utils::database::{DataBase, DB};
 
 #[tokio::main]
 async fn main() -> Result<()> {
+    color_eyre::install()?;
+
     #[cfg(debug_assertions)]
     dotenv::dotenv()?;
 
-    utils::logging::setup(env::var("RUST_LOG")?)?;
+    tracing_subscriber::registry()
+        .with(tracing_subscriber::EnvFilter::from_default_env())
+        .with(tracing_subscriber::fmt::layer())
+        .init();
 
     info!("setting up database");
 
-    let db = DataBase::from_uri(env::var("DATABASE_URL")?).await?;
-    DB.set(db).expect("unable to set DB");
+    let conn = Database::connect(env::var("DATABASE_URL")?).await?;
+    Migrator::up(&conn, None).await?;
 
     info!("finished setting up database");
 
@@ -26,7 +33,7 @@ async fn main() -> Result<()> {
     let addr = format!("[::]:{}", port).parse()?;
 
     Server::builder()
-        .add_service(GreeterService::create_server()) // TODO: Change me
+        .add_service(GreeterService::create_server(conn)) // TODO: Change me
         .serve(addr)
         .await?;
 

@@ -1,3 +1,4 @@
+use sea_orm::DatabaseConnection;
 use template::greeter_server::{Greeter, GreeterServer};
 use template::{HelloReply, HelloRequest};
 use tonic::{Request, Response, Status};
@@ -6,8 +7,11 @@ pub mod template {
     tonic::include_proto!("template");
 }
 
-#[derive(Debug, Default)]
-pub struct GreeterService {}
+#[derive(Default)]
+pub struct GreeterService {
+    #[allow(dead_code)]
+    conn: DatabaseConnection,
+}
 
 #[tonic::async_trait]
 impl Greeter for GreeterService {
@@ -27,8 +31,8 @@ impl Greeter for GreeterService {
 }
 
 impl GreeterService {
-    pub fn create_server() -> GreeterServer<GreeterService> {
-        let server = GreeterService::default();
+    pub fn create_server(conn: DatabaseConnection) -> GreeterServer<GreeterService> {
+        let server = GreeterService { conn };
         GreeterServer::new(server)
     }
 }
